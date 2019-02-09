@@ -13,8 +13,6 @@
 		</style>
 		<title> Enigma HTML </title>
 		<script src = "rotor.js"></script>
-		<!--<script src = "enigma.js"></script>-->
-
 	</head>
 	<body>
 		<input type="number" id="rotor1" max="25" min="0" value="10"></input>
@@ -22,7 +20,7 @@
 		<input type="number" id="rotor3" max="25" min="0" value="0"></input><br>
 		<textarea id="inpuText"></textarea>
 		<textarea id="outputText"></textarea> <br>
-		<button id = "encryptButton">Click Me</button>
+		<button id = "encryptButton">Click me!</button>
 		<script>
 			var rot_1_pos = document.getElementById("rotor1");
 			var rot_2_pos = document.getElementById("rotor2");
@@ -44,9 +42,14 @@
 				Rotor3.setPosition(rot_3_pos.value);
 				var inputSentence = inputSource.value;
 				var outputSentence = "";
+				if(inputSentence.value="")
+				{
+					inputSentence.value = "Put some text here pls";
+				}
 				for(var i = 0; i<inputSentence.length; i++)
 				{
-				  var testLetter = inputSentence[i];
+					var testLetter = inputSentence[i];
+					testLetter = testLetter.toUpperCase();
 					testLetter = Rotor1.forwardEncrypt(testLetter);
 					testLetter = Rotor2.forwardEncrypt(testLetter);
 					testLetter = Rotor3.forwardEncrypt(testLetter);
@@ -66,7 +69,7 @@
 								rot_3_pos.value = Rotor3.currentPosition;
 						}
 					}
-				  outputSentence = outputSentence + testLetter;
+					outputSentence = outputSentence + testLetter;
 				}
 				outputTarget.value = outputSentence;
 			}
