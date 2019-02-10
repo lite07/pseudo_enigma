@@ -2,9 +2,9 @@
 class Rotor
 {
 	constructor(getRotatingString, initialPosition){
-		this.fixedString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		this.rotatingString = getRotatingString
-		this.currentPosition = 0
+		this.fixedString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		this.rotatingString = getRotatingString;
+		this.currentPosition = 0;
 		//Set Initial Rotor Position;
 		for(var i = 0; i<initialPosition; i++)
 		{
@@ -16,7 +16,7 @@ class Rotor
 	{
 		while(this.currentPosition!=targetPosition)
 		{
-			this.rotateRotor()
+			this.rotateRotor();
 		}
 	}
 
@@ -35,7 +35,7 @@ class Rotor
 			}
 		}
 		var encryptedLetter = this.rotatingString[i]
-		return encryptedLetter
+		return encryptedLetter;
 	}
 
 	reverseEncrypt(inputLetter)
@@ -53,16 +53,16 @@ class Rotor
 			}
 		}
 		var encryptedLetter = this.fixedString[i]
-		return encryptedLetter
+		return encryptedLetter;
 	}
 
 	rotateRotor() {
-			var n = this.rotatingString.length
-			this.rotatingString = this.rotatingString[n-1] + this.rotatingString.substring(0,n-1)
-			this.currentPosition++
+			var n = this.rotatingString.length;
+			this.rotatingString = this.rotatingString[n-1] + this.rotatingString.substring(0,n-1);
+			this.currentPosition++;
 			if(this.currentPosition==n)
 			{
-				this.currentPosition = 0
+				this.currentPosition = 0;
 			}
 	}
 }

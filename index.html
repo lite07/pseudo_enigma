@@ -1,78 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 	<head>
 		<style>
-		input{
-			width: 50px;
-		}
-		textarea{
-			text-transform: uppercase;
-			overflow-y: scroll;
-			margin-top: 10px;
-		}
+			input.rotorsetting{
+				width: 50px;
+				margin-top: 5px;
+				margin-bottom: 5px;
+			}
+			input.plugboard{
+				width: 20px;
+				margin-top: 5px;
+				margin-bottom: 5px;
+				text-align: center;
+				text-transform: capitalize;
+			}
+			input.plugcheck{
+				margin-top: 5px;
+				margin-bottom: 5px;
+				margin-left: 5px;
+				margin-right: 6px;
+			}
+			div.topDiv{
+				border-style: dashed;
+				border-width: thin;
+				width: 180px;
+				text-align:center;
+			}
+			div.botDiv{
+				border-style: dashed;
+				border-width: thin;
+				width: 290px;
+				text-align:center;
+				margin-top: 5px;
+			}
+			textarea{
+				text-transform: uppercase;
+				overflow-y: scroll;
+				margin-top: 10px;
+			}
 		</style>
 		<title> Enigma HTML </title>
 		<script src = "rotor.js"></script>
 	</head>
 	<body>
-		<input type="number" id="rotor1" max="25" min="0" value="10"></input>
-		<input type="number" id="rotor2" max="25" min="0" value="0"></input>
-		<input type="number" id="rotor3" max="25" min="0" value="0"></input><br>
+		<div class="topDiv">
+			<input class="rotorsetting" type="number" id="rotor1" max="25" min="0" value="0"></input>
+			<input class="rotorsetting" type="number" id="rotor2" max="25" min="0" value="0"></input>
+			<input class="rotorsetting" type="number" id="rotor3" max="25" min="0" value="0"></input><br>
+		</div>
 		<textarea id="inpuText"></textarea>
-		<textarea id="outputText"></textarea> <br>
-		<button id = "encryptButton">Click me!</button>
-		<script>
-			var rot_1_pos = document.getElementById("rotor1");
-			var rot_2_pos = document.getElementById("rotor2");
-			var rot_3_pos = document.getElementById("rotor3");
+		<textarea id="outputText"></textarea><br>
+		<button id = "encryptButton">Encrypt</button><br>
+		<div class="botDiv">
+			<input class="plugboard" type="text" id="plug1a" maxlength="1" value="A"></input>
+			<input class="plugboard" type="text" id="plug2a" maxlength="1" value="B"></input>
+			<input class="plugboard" type="text" id="plug3a" maxlength="1" value="C"></input>
+			<input class="plugboard" type="text" id="plug4a" maxlength="1" value="D"></input>
+			<input class="plugboard" type="text" id="plug5a" maxlength="1" value="E"></input>
+			<input class="plugboard" type="text" id="plug6a" maxlength="1" value="F"></input>
+			<input class="plugboard" type="text" id="plug7a" maxlength="1" value="G"></input>
+			<input class="plugboard" type="text" id="plug8a" maxlength="1" value="H"></input>
+			<input class="plugboard" type="text" id="plug9a" maxlength="1" value="I"></input>
+			<input class="plugboard" type="text" id="plug10a" maxlength="1" value="J"></input>
+		</div>
+		<div class="botDiv">
+			<input class = "plugcheck" type="checkbox" id="check1"></input>
+			<input class = "plugcheck" type="checkbox" id="check2"></input>
+			<input class = "plugcheck" type="checkbox" id="check3"></input>
+			<input class = "plugcheck" type="checkbox" id="check4"></input>
+			<input class = "plugcheck" type="checkbox" id="check5"></input>
+			<input class = "plugcheck" type="checkbox" id="check6"></input>
+			<input class = "plugcheck" type="checkbox" id="check7"></input>
+			<input class = "plugcheck" type="checkbox" id="check8"></input>
+			<input class = "plugcheck" type="checkbox" id="check9"></input>
+			<input class = "plugcheck" type="checkbox" id="check10"></input>
+		</div>
+		<div class="botDiv">
+			<input class="plugboard" type="text" id="plug1b" maxlength="1" value="K"></input>
+			<input class="plugboard" type="text" id="plug2b" maxlength="1" value="L"></input>
+			<input class="plugboard" type="text" id="plug3b" maxlength="1" value="M"></input>
+			<input class="plugboard" type="text" id="plug4b" maxlength="1" value="N"></input>
+			<input class="plugboard" type="text" id="plug5b" maxlength="1" value="O"></input>
+			<input class="plugboard" type="text" id="plug6b" maxlength="1" value="P"></input>
+			<input class="plugboard" type="text" id="plug7b" maxlength="1" value="Q"></input>
+			<input class="plugboard" type="text" id="plug8b" maxlength="1" value="R"></input>
+			<input class="plugboard" type="text" id="plug9b" maxlength="1" value="S"></input>
+			<input class="plugboard" type="text" id="plug10b" maxlength="1" value="T"></input>
+		</div>
 
-			var inputSource = document.getElementById("inpuText");
-			var outputTarget = document.getElementById("outputText");
-
-			var Rotor1 = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ",0);
-			var Rotor2 = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE",0);
-			var Rotor3 = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO",0);
-			var Reflector = new Rotor("YRUHQSLDPXNGOKMIEBFZCWVJAT",0);
-
-			var eButton = document.getElementById("encryptButton");
-
-			eButton.onclick = function(){
-				Rotor1.setPosition(rot_1_pos.value);
-				Rotor2.setPosition(rot_2_pos.value);
-				Rotor3.setPosition(rot_3_pos.value);
-				var inputSentence = inputSource.value;
-				var outputSentence = "";
-				if(inputSentence.value="")
-				{
-					inputSentence.value = "Put some text here pls";
-				}
-				for(var i = 0; i<inputSentence.length; i++)
-				{
-					var testLetter = inputSentence[i];
-					testLetter = testLetter.toUpperCase();
-					testLetter = Rotor1.forwardEncrypt(testLetter);
-					testLetter = Rotor2.forwardEncrypt(testLetter);
-					testLetter = Rotor3.forwardEncrypt(testLetter);
-					testLetter = Reflector.forwardEncrypt(testLetter);
-					testLetter = Rotor3.reverseEncrypt(testLetter);
-					testLetter = Rotor2.reverseEncrypt(testLetter);
-					testLetter = Rotor1.reverseEncrypt(testLetter);
-					Rotor1.rotateRotor();
-					rot_1_pos.value = Rotor1.currentPosition;
-					if(Rotor1.currentPosition==0)
-					{
-						Rotor2.rotateRotor();
-						rot_2_pos.value = Rotor2.currentPosition;
-						if(Rotor2.currentPosition==0)
-						{
-								Rotor3.rotateRotor();
-								rot_3_pos.value = Rotor3.currentPosition;
-						}
-					}
-					outputSentence = outputSentence + testLetter;
-				}
-				outputTarget.value = outputSentence;
-			}
-		</script>
+		<script src="enigma.js"> </script>
 	</body>
 </html>
